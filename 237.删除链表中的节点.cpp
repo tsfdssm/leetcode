@@ -13,11 +13,16 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    void deleteNode(ListNode* node) {
-        
+    void deleteNode(ListNode *node)
+    {
+        ListNode *tmp = node->next;
+        node->val = tmp->val;
+        node->next = tmp->next;
+        delete tmp;
+        return;
     }
 };
 // @lc code=end
-
