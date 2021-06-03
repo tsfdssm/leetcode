@@ -10,16 +10,32 @@ class Solution
 public:
     vector<vector<int>> kSmallestPairs(vector<int> &nums1, vector<int> &nums2, int k)
     {
-        vector<int> tmp(2);
+        priority_queue<pair<int, vector<int>>> q;
         vector<vector<int>> res;
-        tmp[0] = nums1[0];
-        tmp[1] = nums2[0];
-        int i = 0, j = 0;
-        int m = nums1.size();
-        int n = nums2.size();
-        while (i < m && j < n)
+
+        for (const int &a : nums1)
+            for (const int &b : nums2)
+            {
+                if (q.size() < k)
+                {
+                    q.push({a + b, {a, b}});
+                }
+                else
+                {
+                    if (q.top().first > (a + b))
+                    {
+                        q.pop();
+                        q.push({a + b, {a, b}});
+                    }
+                }
+            }
+        while (!q.empty())
         {
+            res.emplace_back(q.top().second);
+            q.pop();
         }
+        reverse(res.begin(), res.end());
+        return res;
     }
 };
 // @lc code=end
