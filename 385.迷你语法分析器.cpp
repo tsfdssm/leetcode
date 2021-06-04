@@ -34,11 +34,48 @@
  *     const vector<NestedInteger> &getList() const;
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    NestedInteger deserialize(string s) {
-
+    NestedInteger deserialize(string s)
+    {
+        int n = s.size();
+        if (0 == n)
+            return NestedInteger();
+        if ('[' != s[0])
+            return NestedInteger(stoi(s));
+        stack<NestedInteger> st;
+        string num;
+        for (char c : s)
+        {
+            if ('[' == c)
+            {
+                st.push(NestedInteger());
+            }
+            else if (',' == c)
+            {
+                if (!num.empty())
+                    st.top().add(NestedInteger(stoi(num)));
+                num.clear();
+            }
+            else if (']' == c)
+            {
+                if (!num.empty())
+                    st.top().add(NestedInteger(stoi(num)));
+                num.clear();
+                if (st.size() > 1)
+                {
+                    auto now = st.top();
+                    st.pop();
+                    st.top().add(now);
+                }
+            }
+            else
+            {
+                num += c;
+            }
+        }
+        return st.top();
     }
 };
 // @lc code=end
-
