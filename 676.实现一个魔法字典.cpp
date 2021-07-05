@@ -5,19 +5,41 @@
  */
 
 // @lc code=start
-class MagicDictionary {
+class MagicDictionary
+{
 public:
     /** Initialize your data structure here. */
-    MagicDictionary() {
 
+    unordered_map<string, unordered_set<string>> mp;
+    MagicDictionary()
+    {
     }
-    
-    void buildDict(vector<string> dictionary) {
 
+    void buildDict(const vector<string> &dictionary)
+    {
+        string tmp;
+        for (const auto &s : dictionary)
+        {
+            for (int i = 0; i < s.size(); ++i)
+            {
+                tmp = s;
+                tmp[i] = '*';
+                mp[tmp].emplace(s);
+            }
+        }
     }
-    
-    bool search(string searchWord) {
 
+    bool search(const string &searchWord)
+    {
+        string tmp;
+        for (int i = 0; i < searchWord.size(); ++i)
+        {
+            tmp = searchWord;
+            tmp[i] = '*';
+            if (mp.count(tmp) && (mp[tmp].size() > 1 || mp[tmp].size() == 1 && !mp[tmp].count(searchWord)))
+                return true;
+        }
+        return false;
     }
 };
 
@@ -28,4 +50,3 @@ public:
  * bool param_2 = obj->search(searchWord);
  */
 // @lc code=end
-
