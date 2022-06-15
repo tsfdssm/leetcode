@@ -90,8 +90,8 @@
 class DinnerPlates
 {
     const static int N = 2e5 + 5;
-    int minn[N * 4];
-    int maxn[N * 4];
+    int minn[N * 3];
+    int maxn[N * 3];
 
     int q_l(int u, int l, int r)
     {
