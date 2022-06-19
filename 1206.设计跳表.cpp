@@ -80,6 +80,7 @@
 class Skiplist
 {
 public:
+<<<<<<< HEAD
     struct node
     {
         int val;
@@ -124,10 +125,19 @@ public:
         }
         cur = cur->nxt[0];
         return cur != nullptr && (cur->val == target);
+=======
+    Skiplist()
+    {
+    }
+
+    bool search(int target)
+    {
+>>>>>>> 34fe21a092a56a5fae2f463afba4ae8952ad8d3d
     }
 
     void add(int num)
     {
+<<<<<<< HEAD
         int lvl = random_level();
         auto newNode = new node(num, lvl);
         node *cur = phead;
@@ -140,10 +150,13 @@ public:
             newNode->nxt[i] = cur->nxt[i];
             cur->nxt[i] = newNode;
         }
+=======
+>>>>>>> 34fe21a092a56a5fae2f463afba4ae8952ad8d3d
     }
 
     bool erase(int num)
     {
+<<<<<<< HEAD
         vector<node *> update(MAX_LEVEL + 1, nullptr);
         node *cur = phead;
         int i = level;
@@ -169,6 +182,8 @@ public:
         while (level > 0 && nullptr == phead->nxt[level])
             --level;
         return true;
+=======
+>>>>>>> 34fe21a092a56a5fae2f463afba4ae8952ad8d3d
     }
 };
 
